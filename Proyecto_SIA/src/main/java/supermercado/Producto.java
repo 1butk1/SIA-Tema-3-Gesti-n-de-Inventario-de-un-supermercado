@@ -17,7 +17,7 @@ public class Producto {
    private int stock;
    private int stockMinimo;
    
-   public Producto(String codigo, String nombre, double precio, int sotck, int stockMinimo){
+   public Producto(String codigo, String nombre, double precio, int stock, int stockMinimo){
        this.codigo = codigo;
        this.nombre = nombre;
        this.precio = precio;
@@ -37,9 +37,8 @@ public class Producto {
    }
    public void aumentarStock(int cantidad, String motivo){
        this.stock += cantidad;
-       System.out.println("Stock de " + this.nombre + "aumentado en " + cantidad +". Motivo : " + motivo);
+       System.out.println("Stock de " + this.nombre + "aumentado en " + cantidad +".\nMotivo : " + motivo);
    }
-   
    
    public String toString(){
        return "Producto [" + codigo + "] - " + nombre + " | Precio: $" + precio + " | Stock: " + stock;
@@ -51,10 +50,11 @@ public class Producto {
    public void setPrecio(double precio){this.precio = precio;}
    public int getStock(){return stock; }
    public void setStock(int stock){ this.stock = stock; }
-   public int getStockMinimo(){return stock;}
+   public int getStockMinimo(){return stockMinimo;}
    public void setStockMinimo(int stockMinimo){this.stockMinimo = stockMinimo;}
    public String getCodigo() { return codigo; }
 }
    
    
 
+ 
