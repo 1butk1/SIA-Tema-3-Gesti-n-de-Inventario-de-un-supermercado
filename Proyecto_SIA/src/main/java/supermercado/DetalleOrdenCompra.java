@@ -17,10 +17,6 @@ public class DetalleOrdenCompra {
         this.producto = producto;
         this.cantidad = cantidad;
     }
-    
-    //falta detalleOrdenCompra//
-    
-    
     public Producto getProducto(){return producto;}
     public void setProducto(Producto producto){
         this.producto = producto;
@@ -29,5 +25,9 @@ public class DetalleOrdenCompra {
     public void setCantidad(int cantidad){
         this.cantidad = cantidad;
     }
-   
+   @Override
+    public String toString() {
+        String nombreProd = (producto != null) ? producto.getNombre() : "Sin producto";
+        return "Detalle [Producto: " + nombreProd + " | Cantidad: " + cantidad + "]";
+    }
 }
