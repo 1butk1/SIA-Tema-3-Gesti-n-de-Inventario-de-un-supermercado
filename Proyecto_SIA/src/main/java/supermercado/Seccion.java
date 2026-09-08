@@ -12,12 +12,10 @@ package supermercado;
 
 import java.util.HashMap;
 
-
 public class Seccion {
     
     private String codigo;
     private String nombre;
-    
     private HashMap<String, Producto> productos;
     
     public Seccion(String codigo, String nombre){
@@ -25,15 +23,13 @@ public class Seccion {
         this.nombre = nombre;
         this.productos = new HashMap<>();
     }
-  
+
     public void agregarProducto(Producto p){
         this.productos.put(p.getCodigo(), p);
     }
     public Producto buscarProducto(String codigoProducto){
         return this.productos.get(codigoProducto);
     }
-    
-    
     public String getCodigo() {
         return codigo;
     }
