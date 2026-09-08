@@ -21,7 +21,6 @@ public class LectorCSV {
 
     public static Supermercado leerDatosCSV() throws IOException {
         Supermercado supermercado = new Supermercado("Supermercado Central", "76.123.456-7");
-
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("datos_supermercado.csv"), StandardCharsets.UTF_8))) {
             String linea;
             boolean primeraLinea = true;
