@@ -16,19 +16,21 @@ public class Producto {
    private double precio;
    private int stock;
    private int stockMinimo;
+   private int puntoReOrden;
    
-   public Producto(String codigo, String nombre, double precio, int stock, int stockMinimo){
+   public Producto(String codigo, String nombre, double precio, int stock, int stockMinimo, int puntoReOrden){
        this.codigo = codigo;
        this.nombre = nombre;
        this.precio = precio;
        this.stock = stock;
        this.stockMinimo = stockMinimo;
+       this.puntoReOrden = puntoReOrden;
    }
     
    public void descontarStock(int cantidad){
        this.stock -= cantidad;
    }
-   
+  
    public boolean requiereRebastecimiento(){
        return this.stock <= this.stockMinimo;
    }
@@ -39,7 +41,7 @@ public class Producto {
        this.stock += cantidad;
        System.out.println("Stock de " + this.nombre + "aumentado en " + cantidad +".\nMotivo : " + motivo);
    }
-   
+   @Override
    public String toString(){
        return "Producto [" + codigo + "] - " + nombre + " | Precio: $" + precio + " | Stock: " + stock;
    }
@@ -52,7 +54,9 @@ public class Producto {
    public void setStock(int stock){ this.stock = stock; }
    public int getStockMinimo(){return stockMinimo;}
    public void setStockMinimo(int stockMinimo){this.stockMinimo = stockMinimo;}
-   public String getCodigo() { return codigo; }
+   public String getCodigo() { return codigo;}
+   public int getPuntoReOrden(){return puntoReOrden;}
+   public void setPuntoReOrden(int puntoReOrden){this.puntoReOrden = puntoReOrden;}
 }
    
    
