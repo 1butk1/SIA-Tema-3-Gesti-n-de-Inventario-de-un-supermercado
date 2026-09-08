@@ -14,7 +14,7 @@ public class OrdenCompra {
     private String fecha;
     private Proveedor proveedor;
     private ArrayList<DetalleOrdenCompra> detalles;
-   //falta completar ordenCompra//
+  
     public OrdenCompra(String idOrden, String fecha, Proveedor proveedor){
         this.idOrden = idOrden;
         this.fecha = fecha;
@@ -45,6 +45,10 @@ public class OrdenCompra {
     public String getFecha(){ return fecha;}
     public Proveedor getProveedor(){return proveedor;}
     public ArrayList getDetalles(){return detalles;}
+    public void setIdOrden(String idOrden){this.idOrden = idOrden;}
+    public void setFecha(String fecha){this.fecha = fecha;}
+    public void setProveedor(Proveedor proveedor){this.proveedor = proveedor;}
+    public void setDetalles(ArrayList<DetalleOrdenCompra> detalles){this.detalles = detalles;}
     
     @Override 
     public String toString(){
