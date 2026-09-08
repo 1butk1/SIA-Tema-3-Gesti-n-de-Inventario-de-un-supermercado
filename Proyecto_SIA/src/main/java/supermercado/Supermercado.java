@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package supermercado;
-
+import java.util.HashMap;
+import Excepciones.ProductoNoEncontradoException;
 /**
  *
  * @author ignac
  */
-
-import java.util.HashMap;
-
 public class Supermercado {
     
     
@@ -32,15 +30,16 @@ public class Supermercado {
     public Seccion buscarSeccion(String codigo) {
         return this.secciones.get(codigo);
     }
-    public Producto buscarProducto(String codigoProducto) {
-        for (Seccion s : secciones.values()) {
-            Producto p = s.buscarProducto(codigoProducto);
-            if (p != null) {
-                return p;
-            }
+    public Producto buscarProducto(String codigoProducto)throws ProductoNoEncontradoException {
+    for (Seccion s : secciones.values()) {
+        Producto p = s.buscarProducto(codigoProducto);
+        if (p != null) {
+            return p;
         }
-        return null; 
     }
+    throw new ProductoNoEncontradoException("No se encontró el producto con código: " + codigoProducto);
+}
+    
     public Producto buscarProducto(String nombreProducto, String codigoSeccion) {
         Seccion s = this.buscarSeccion(codigoSeccion);
         if (s != null) {
