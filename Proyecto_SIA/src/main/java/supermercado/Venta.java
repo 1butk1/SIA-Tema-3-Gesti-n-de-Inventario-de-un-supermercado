@@ -20,9 +20,38 @@ public class Venta {
         this.fecha = fecha;
         this.productosVendidos = new HashMap<>();
     }
-    //falta AgregarProductos
-    //falta calcularTotal
-    //falta procesarVenta
+    public void AgregarProductos(Producto p, int cantidad){
+        if(p == null || cantidad <=  0){return;}
+        String codigo = p.getCodigo();
+        int cantidadActual = productosVendidos.getOrDefault(codigo, 0);
+        productosVendidos.put(codigo,cantidadActual + cantidad);        
+    }
+    public double calcularTotal(HashMap<String, Producto> inventario){
+        double total = 0.0;
+        for(String codigo : productosVendidos.keySet()){
+            Producto prod = inventario.get(codigo);
+            if(prod != null){
+                int cantidad = productosVendidos.get(codigo);
+                total += prod.getPrecio() * cantidad;
+            }
+        }
+        return total;
+    }
+    public boolean procesarVenta(HashMap<String, Producto> inventario){
+        for(String codigo : productosVendidos.keySet()){
+            Producto prod = inventario.get(codigo);
+            int cantidadRequerida = productosVendidos.get(codigo);
+            if(prod == null || prod.getStock() < cantidadRequerida){
+                return false;
+            }
+        }
+            for(String codigo : productosVendidos.keySet()){
+                Producto prod = inventario.get(codigo);
+                int cantidad = productosVendidos.get(codigo);
+                prod.descontarStock(cantidad);
+            }
+            return true;
+        }
     public String getIdVenta(){return idVenta;}
     public String getFecha(){return fecha;}
     public HashMap<String,Integer> getProductos(){return productosVendidos;}
