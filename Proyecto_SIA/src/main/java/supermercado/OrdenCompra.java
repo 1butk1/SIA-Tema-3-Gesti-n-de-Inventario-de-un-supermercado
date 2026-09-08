@@ -19,7 +19,7 @@ public class OrdenCompra {
         this.idOrden = idOrden;
         this.fecha = fecha;
         this.proveedor = proveedor;
-        this.detalles = new ArrayList<> ();
+        this.detalles = new ArrayList<>();
     }
     public void agregarDetalle(DetalleOrdenCompra detalle){
         if(detalle != null){
@@ -52,11 +52,6 @@ public class OrdenCompra {
     
     @Override 
     public String toString(){
-        return "OrdenCompra{" +
-                "idOrden='" + idOrden + '\'' +
-                ", fecha='" + fecha + '\'' +
-                ", proveedor=" + (proveedor != null ? proveedor.getRazonSocial() : "null") +
-                ", cantidadDetalles=" + detalles.size() +
-                '}';
+        return "OrdenCompra{" +"idOrden='" + idOrden + '\'' +", fecha='" + fecha + '\'' +", proveedor=" + (proveedor != null ? proveedor.getRazonSocial() : "null") +", cantidadDetalles=" + detalles.size() +'}';
     }
 }
