@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package supermercado;
-
+import Excepciones.StockInsuficienteException;
 /**
  *
  * @author ignac
@@ -26,10 +26,15 @@ public class Producto {
        this.stockMinimo = stockMinimo;
        this.puntoReOrden = puntoReOrden;
    }
+
     
-   public void descontarStock(int cantidad){
-       this.stock -= cantidad;
-   }
+  public void descontarStock(int cantidad)throws StockInsuficienteException {
+
+    if (cantidad > stock) {
+        throw new StockInsuficienteException("Stock insuficiente para el producto: " + nombre);
+    }
+    stock -= cantidad;
+}
   
    public boolean requiereRebastecimiento(){
        return this.stock <= this.stockMinimo;
