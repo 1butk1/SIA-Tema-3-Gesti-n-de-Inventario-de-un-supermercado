@@ -12,4 +12,13 @@ import java.io.IOException;
  * @author ignac
  */
 public class Main {
+    public static void main(String[] args) throws IOException {
+        System.out.println("Iniciando sistema y leyendo archivo CSV");
+        Supermercado supermercado = LectorCSV.leerDatosCSV();
+        
+        if (supermercado == null) return;
+        System.out.println("Datos cargados exitosamente!");
+        Terminal terminal = new Terminal(supermercado);
+        terminal.iniciar();
+    }
 }
