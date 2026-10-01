@@ -10,9 +10,9 @@ consola como en interfaz grafica.
 
 INTEGRANTES
 ------------------------------------------------------------
-- [completar]
-- [completar]
-- [completar]
+- [Ignacio Rodriguez]
+- [Matia Rios]
+- [Diego Aguilar]
 
 
 TECNOLOGIAS UTILIZADAS
