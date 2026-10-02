@@ -35,7 +35,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonBuscarSeccion.setText("Buscar Sección");
+        jButtonBuscarSeccion.setText("Gestión de Secciones");
         jButtonBuscarSeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarSeccionActionPerformed(evt);
@@ -96,7 +96,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void jButtonBuscarSeccionActionPerformed(java.awt.event.ActionEvent evt) {
-        VentanaBuscarSeccion ventana = new VentanaBuscarSeccion(supermercado);
+        VentanaSecciones ventana = new VentanaSecciones(supermercado);
         ventana.setVisible(true);
     }
 

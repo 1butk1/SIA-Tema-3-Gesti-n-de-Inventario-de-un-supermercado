@@ -17,6 +17,7 @@ public class VentanaProductos extends javax.swing.JFrame {
     private JButton jButton3; // Eliminar Producto
     private JButton jButton4; // Buscar por código
     private JButton jButton5; // Actualizar Stock
+    private JButton jButton6; // Editar Atributos 
     private JTextArea textAreaResultado;
 
     public VentanaProductos(Supermercado supermercado) {
@@ -26,7 +27,7 @@ public class VentanaProductos extends javax.swing.JFrame {
 
     private void initComponents() {
         setTitle("Gestión de Productos");
-        setSize(600, 500);
+        setSize(700, 500); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -34,17 +35,19 @@ public class VentanaProductos extends javax.swing.JFrame {
         titulo.setFont(new Font("Tahoma", Font.BOLD, 22));
 
         jButton1 = new JButton("Stock Actual");
-        jButton2 = new JButton("Agregar Producto");
-        jButton3 = new JButton("Eliminar Producto");
-        jButton4 = new JButton("Buscar por código");
-        jButton5 = new JButton("Actualizar Stock");
+        jButton2 = new JButton("Agregar");
+        jButton3 = new JButton("Eliminar");
+        jButton4 = new JButton("Buscar");
+        jButton5 = new JButton("Stock (+)");
+        jButton6 = new JButton("Editar"); 
 
-        JPanel panelBotones = new JPanel(new GridLayout(1, 5, 5, 5));
+        JPanel panelBotones = new JPanel(new GridLayout(1, 6, 5, 5));
         panelBotones.add(jButton1);
         panelBotones.add(jButton2);
         panelBotones.add(jButton3);
         panelBotones.add(jButton4);
         panelBotones.add(jButton5);
+        panelBotones.add(jButton6); 
 
         textAreaResultado = new JTextArea();
         textAreaResultado.setEditable(false);
@@ -61,6 +64,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         jButton3.addActionListener(e -> eliminarProducto());
         jButton4.addActionListener(e -> buscarProducto());
         jButton5.addActionListener(e -> actualizarStock());
+        jButton6.addActionListener(e -> editarAtributosProducto()); 
 
         mostrarStockActual();
     }
@@ -177,6 +181,32 @@ public class VentanaProductos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Excepción", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void editarAtributosProducto() {
+        String codigo = JOptionPane.showInputDialog(this, "Código del producto a editar:");
+        if (codigo == null || codigo.trim().isEmpty()) return;
+
+        try {
+            Producto p = supermercado.buscarProducto(codigo.trim());
+            
+            String nuevoNom = JOptionPane.showInputDialog(this, "Nuevo nombre (Actual: " + p.getNombre() + "):");
+            if (nuevoNom != null && !nuevoNom.trim().isEmpty()) p.setNombre(nuevoNom.trim());
+
+            String nuevoPrecioStr = JOptionPane.showInputDialog(this, "Nuevo precio (Actual: $" + p.getPrecio() + "):");
+            if (nuevoPrecioStr != null && !nuevoPrecioStr.trim().isEmpty()) p.setPrecio(Double.parseDouble(nuevoPrecioStr.trim()));
+
+            String nuevoStockStr = JOptionPane.showInputDialog(this, "Nuevo stock (Actual: " + p.getStock() + "):");
+            if (nuevoStockStr != null && !nuevoStockStr.trim().isEmpty()) p.setStock(Integer.parseInt(nuevoStockStr.trim()));
+
+            JOptionPane.showMessageDialog(this, "¡Producto modificado con éxito!");
+            mostrarStockActual();
+
+        } catch (ProductoNoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Entrada numérica inválida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
