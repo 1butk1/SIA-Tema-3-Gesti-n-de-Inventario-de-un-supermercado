@@ -1,7 +1,9 @@
 package supermercado;
 
 import Excepciones.StockInsuficienteException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Venta {
     
@@ -39,7 +41,8 @@ public class Venta {
             Producto prod = inventario.get(codigo);
             if (prod != null) {
                 int cantidad = productosVendidos.get(codigo);
-                total += prod.getPrecio() * cantidad;
+                // Cambio: Polimorfismo mediante calcularPrecioFinal()
+                total += prod.calcularPrecioFinal() * cantidad;
             }
         }
         return total;
@@ -69,6 +72,10 @@ public class Venta {
     public void setIdVenta(String idVenta) { this.idVenta = idVenta; }
     public String getFecha() { return fecha; }
     public void setFecha(String fecha) { this.fecha = fecha; }
-    public HashMap<String, Integer> getProductosVendidos() { return productosVendidos; }
+    
+    // Cambio: Retorna un Map no modificable con Collections.unmodifiableMap
+    public Map<String, Integer> getProductosVendidos() { 
+        return Collections.unmodifiableMap(this.productosVendidos); 
+    }
+    
     public void setProductosVendidos(HashMap<String, Integer> productosVendidos) { this.productosVendidos = productosVendidos; }
-}

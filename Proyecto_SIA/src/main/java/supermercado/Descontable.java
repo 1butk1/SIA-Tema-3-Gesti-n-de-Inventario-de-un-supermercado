@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package supermercado;
 
 /**
  *
- * @author ignac
+ * @author diego
  */
-/**
- * Clase encargada de la interfaz de consola del sistema.
- */
-public class Consola {
-    
+public interface Descontable {
+    double calcularPrecioFinal();
 }

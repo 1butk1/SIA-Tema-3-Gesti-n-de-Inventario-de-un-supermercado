@@ -9,61 +9,71 @@ import Excepciones.StockInsuficienteException;
  *
  * @author ignac
  */
-public class Producto {
+public class Producto implements Descontable {
     
-   private String codigo;
-   private String nombre;
-   private double precio;
-   private int stock;
-   private int stockMinimo;
-   private int puntoReOrden;
+    private String codigo;
+    private String nombre;
+    private double precio;
+    private int stock;
+    private int stockMinimo;
+    private int puntoReOrden;
    
-   public Producto(String codigo, String nombre, double precio, int stock, int stockMinimo, int puntoReOrden){
-       this.codigo = codigo;
-       this.nombre = nombre;
-       this.precio = precio;
-       this.stock = stock;
-       this.stockMinimo = stockMinimo;
-       this.puntoReOrden = puntoReOrden;
-   }
-
-    
-  public void descontarStock(int cantidad)throws StockInsuficienteException {
-
-    if (cantidad > stock) {
-        throw new StockInsuficienteException("Stock insuficiente para el producto: " + nombre);
+    public Producto(String codigo, String nombre, double precio, int stock, int stockMinimo, int puntoReOrden) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.stockMinimo = stockMinimo;
+        this.puntoReOrden = puntoReOrden;
     }
-    stock -= cantidad;
-}
+
+    /**
+     * Lógica de negocio: Aplica un 10% de descuento si el stock supera 50 unidades.
+     */
+    @Override
+    public double calcularPrecioFinal() {
+        if (this.stock > 50) {
+            return this.precio * 0.90;
+        }
+        return this.precio;
+    }
+
+    public void descontarStock(int cantidad) throws StockInsuficienteException {
+        if (cantidad > stock) {
+            throw new StockInsuficienteException("Stock insuficiente para el producto: " + nombre);
+        }
+        stock -= cantidad;
+    }
   
-   public boolean requiereRebastecimiento(){
-       return this.stock <= this.stockMinimo;
-   }
-   public void aumentarStock(int cantidad){
-       this.stock += cantidad;
-   }
-   public void aumentarStock(int cantidad, String motivo){
-       this.stock += cantidad;
-       System.out.println("Stock de " + this.nombre + "aumentado en " + cantidad +".\nMotivo : " + motivo);
-   }
-   @Override
-   public String toString(){
-       return "Producto [" + codigo + "] - " + nombre + " | Precio: $" + precio + " | Stock: " + stock;
-   }
+    public boolean requiereRebastecimiento() {
+        return this.stock <= this.stockMinimo;
+    }
+
+    public void aumentarStock(int cantidad) {
+        this.stock += cantidad;
+    }
+
+    public void aumentarStock(int cantidad, String motivo) {
+        this.stock += cantidad;
+        System.out.println("Stock de " + this.nombre + " aumentado en " + cantidad + ".\nMotivo : " + motivo);
+    }
+
+    @Override
+    public String toString() {
+        return "Producto [" + codigo + "] - " + nombre + " | Precio Base: $" + precio + " | Precio Final: $" + calcularPrecioFinal() + " | Stock: " + stock;
+    }
    
-   public String getNombre(){return nombre;}
-   public void setNombre(String nombre){ this.nombre = nombre;}
-   public double getPrecio() { return precio; }
-   public void setPrecio(double precio){this.precio = precio;}
-   public int getStock(){return stock; }
-   public void setStock(int stock){ this.stock = stock; }
-   public int getStockMinimo(){return stockMinimo;}
-   public void setStockMinimo(int stockMinimo){this.stockMinimo = stockMinimo;}
-   public String getCodigo() { return codigo;}
-   public int getPuntoReOrden(){return puntoReOrden;}
-   public void setPuntoReOrden(int puntoReOrden){this.puntoReOrden = puntoReOrden;}
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public double getPrecio() { return precio; }
+    public void setPrecio(double precio) { this.precio = precio; }
+    public int getStock() { return stock; }
+    public void setStock(int stock) { this.stock = stock; }
+    public int getStockMinimo() { return stockMinimo; }
+    public void setStockMinimo(int stockMinimo) { this.stockMinimo = stockMinimo; }
+    public String getCodigo() { return codigo; }
+    public int getPuntoReOrden() { return puntoReOrden; }
+    public void setPuntoReOrden(int puntoReOrden) { this.puntoReOrden = puntoReOrden; }
 }
-   
-   
 
  
